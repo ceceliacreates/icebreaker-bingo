@@ -1,0 +1,50 @@
+[
+    {
+        "id": 0,
+        "item": "Has lived in another country"
+    },
+    {
+        "id": 1,
+        "item": "Rides public transportation to work"
+    },
+    {
+        "id": 2,
+        "item": "Loves Android and not Apple"
+    },
+    {
+        "id": 3,
+        "item": "Is a vegan"
+    },
+    {
+        "id": 4,
+        "item": "Has a pet"
+    },
+    {
+        "id": 5,
+        "item": "Carries a flash drive"
+    },
+    {
+        "id": 6,
+        "item": "Works remotely"
+    },
+    {
+        "id": 7,
+        "item": "Is wearing yellow"
+    },
+    {
+        "id": 8,
+        "item": "Has been skydiving"
+    },
+    {
+        "id": 9,
+        "item": "First year in town"
+    },
+    {
+        "id": 10,
+        "item": "Grew up in the South"
+    },
+    {
+        "id": 11,
+        "item": "Is left-handed"
+    }
+]
