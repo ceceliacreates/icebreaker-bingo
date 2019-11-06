@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import './App.css';
 import { Typography, Card, Grid, CardContent } from '@material-ui/core';
 import bingoItems from './bingoItems.json';
 import { styled } from '@material-ui/core/styles';
+import BingoHeader from './components/bingoHeader';
 
 const BingoItem = styled(Card)({
   textAlign: 'center',
@@ -34,7 +35,13 @@ class App extends React.Component {
       10: false,
       11: false
     };
-    this.markComplete = this.markComplete.bind(this);
+
+  }
+
+  markComplete = e => {
+    const id = e.target.id;
+    this.setState({[id]: true})
+
   }
 
   bingoRow(row) {
@@ -90,20 +97,10 @@ class App extends React.Component {
     )
   }
 
-  markComplete(e) {
-    const id = e.target.id;
-    this.setState({[id]: true})
-
-  }
-
   render() {
   return (
     <>
-      <Grid container justify="center" alignItems="center">
-        <Typography variant='h3' gutterBottom>
-          Icebreaker Bingo
-      </Typography>
-      </Grid>
+      <BingoHeader />
       {this.bingoRow(1)}
       {this.bingoRow(2)}
       {this.bingoRow(3)}
