@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Typography, Card, Grid, CardContent } from '@material-ui/core';
+import { Typography, Card, Grid, CardContent,TextField, Button } from '@material-ui/core';
 import bingoItems from './bingoItems.json';
 import { styled } from '@material-ui/core/styles';
 import BingoHeader from './components/bingoHeader';
@@ -33,7 +33,19 @@ class App extends React.Component {
       8: false,
       9: false,
       10: false,
-      11: false
+      11: false,
+      "input0": null,
+      "input1": null,
+      "input2": null,
+      "input3": null,
+      "input4": null,
+      "input5": null,
+      "input6": null,
+      "input7": null,
+      "input8": null,
+      "input9": null,
+      "input10": null,
+      "input11": null
     };
 
   }
@@ -42,6 +54,15 @@ class App extends React.Component {
     const id = e.target.id;
     this.setState({[id]: true})
 
+  }
+
+  saveName = e => {
+    const buttonId = e.currentTarget.id.slice(-1);
+    const inputId = "input" + buttonId;
+    console.log(inputId)
+    const input = document.getElementById(inputId).value;
+    console.log(input);
+    this.setState({[inputId]: input})
   }
 
   bingoRow(row) {
@@ -63,17 +84,22 @@ class App extends React.Component {
       case 4:
         renderRow = rowFour;
         break;
+      default:
+        renderRow = rowOne;
       }
     return (
     <Grid container justify="center" alignItems="center" alignContent="center" spacing={3}>
       {renderRow.map(item => {
         const id = item.id;
+        const inputId = "input" + id;
         if (this.state[id] === true) {
           return (
             <Grid item xs={3} key={item.id}>
-              <CompletedItem id={item.id}>
+              <CompletedItem id={id}>
                 <CardContent>
-                <Typography variant='body' gutterBottom>Complete</Typography>
+                <TextField id={"input" + id} defaultValue="Enter Name"></TextField>
+                <Typography variant='body1'>Name: {this.state[inputId]}</Typography>
+                <Button id={"button" + item.id} onClick={this.saveName}>Save</Button>
                 </CardContent>
               </CompletedItem>
               </Grid>
@@ -84,7 +110,7 @@ class App extends React.Component {
            <Grid item xs={3} key={item.id}>
           <BingoItem id={item.id} onClick={this.markComplete}> 
           <CardContent>
-            <Typography variant='body' id={item.id} onClick={this.markComplete} gutterBottom>
+            <Typography variant='body1' id={item.id} onClick={this.markComplete} gutterBottom>
             {item.item}</Typography>
           </CardContent>
           </BingoItem>
