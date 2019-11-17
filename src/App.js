@@ -6,7 +6,12 @@ import { styled } from '@material-ui/core/styles';
 import BingoHeader from './components/bingoHeader';
 
 const BingoItem = styled(Card)({
+  display: "flex",
+  alignItems: 'center',
+  justifyContent: 'center',
   textAlign: 'center',
+  width: "300px",
+  height: "225px",
   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
   color: 'white'
 })
@@ -34,18 +39,18 @@ class App extends React.Component {
       9: false,
       10: false,
       11: false,
-      "input0": null,
-      "input1": null,
-      "input2": null,
-      "input3": null,
-      "input4": null,
-      "input5": null,
-      "input6": null,
-      "input7": null,
-      "input8": null,
-      "input9": null,
-      "input10": null,
-      "input11": null
+      "name0": null,
+      "name1": null,
+      "name2": null,
+      "name3": null,
+      "name4": null,
+      "name5": null,
+      "name6": null,
+      "name7": null,
+      "name8": null,
+      "name9": null,
+      "name10": null,
+      "name11": null
     };
 
   }
@@ -56,13 +61,13 @@ class App extends React.Component {
 
   }
 
-  saveName = e => {
+  savePerson = e => {
     const buttonId = e.currentTarget.id.slice(-1);
-    const inputId = "input" + buttonId;
-    console.log(inputId)
-    const input = document.getElementById(inputId).value;
-    console.log(input);
-    this.setState({[inputId]: input})
+    const nameId = "name" + buttonId;
+    const emailId = "email" + buttonId;
+    const nameInput = document.getElementById(nameId).value;
+    const emailInput = document.getElementById(emailId).value;
+    this.setState({[nameId]: nameInput, [emailId]: emailInput})
   }
 
   bingoRow(row) {
@@ -91,15 +96,31 @@ class App extends React.Component {
     <Grid container justify="center" alignItems="center" alignContent="center" spacing={3}>
       {renderRow.map(item => {
         const id = item.id;
-        const inputId = "input" + id;
+        const nameId = "name" + id;
+        const emailId = "email" + id;
+        let results;
+        let buttonText;
+        if (this.state[nameId] !== null || this.state[nameId] !== null) {
+          buttonText = "Update";
+          results = 
+          <>
+          <Typography variant='body1'>Name: {this.state[nameId]}</Typography>
+          <Typography variant="body1">Email: {this.state[emailId]}</Typography>
+          </>
+        }
+        else {
+          buttonText = "Save"
+          results = <Typography variant="body1"></Typography>
+        }
         if (this.state[id] === true) {
           return (
             <Grid item xs={3} key={item.id}>
               <CompletedItem id={id}>
                 <CardContent>
-                <TextField id={"input" + id} defaultValue="Enter Name"></TextField>
-                <Typography variant='body1'>Name: {this.state[inputId]}</Typography>
-                <Button id={"button" + item.id} onClick={this.saveName}>Save</Button>
+                <TextField id={"name" + id} label="Enter Name"></TextField>
+                <TextField id={"email" + id} label="Enter Email"></TextField>
+                {results}
+                <Button id={"button" + item.id} onClick={this.savePerson}>{buttonText}</Button>
                 </CardContent>
               </CompletedItem>
               </Grid>
@@ -110,7 +131,7 @@ class App extends React.Component {
            <Grid item xs={3} key={item.id}>
           <BingoItem id={item.id} onClick={this.markComplete}> 
           <CardContent>
-            <Typography variant='body1' id={item.id} onClick={this.markComplete} gutterBottom>
+            <Typography variant='button' id={item.id} onClick={this.markComplete} gutterBottom>
             {item.item}</Typography>
           </CardContent>
           </BingoItem>
